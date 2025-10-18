@@ -294,19 +294,27 @@ def write_markdown_report(outdir: str, student_id: str = "16374515") -> None:
     lines.append("## Conclusion")
     lines.append(conclusion_text)
     lines.append("")
-    lines.append("## Artifacts")
 
-    if outdir_path.exists():
-        base = outdir_path.name
-        for alg in algorithms:
-            metrics_entry = f"- {base}/{alg}_no_transient_metrics.csv, {base}/{alg}_with_transient_metrics.csv, {base}/{alg}_no_transient_gantt.png, {base}/{alg}_with_transient_gantt.png"
-            lines.append(metrics_entry)
-        lines.append(f"- {base}/comparison_no_transient.csv")
-        if transient_available:
-            lines.append(f"- {base}/comparison_with_transient.csv")
-        lines.append(f"- {base}/processes_used.json")
-    else:
-        lines.append("- No artifacts were generated.")
+    visuals_lines = [
+        "## Visualizations",
+        "",
+        "Below are representative Gantt charts illustrating algorithm behavior before and after the transient event.",
+        "",
+        "**Figure 1.** FCFS - No Transient",
+        f"![FCFS Gantt Chart]({outdir_path.name}/FCFS_no_transient_gantt.png)",
+        "",
+        "**Figure 2.** SJF - No Transient",
+        f"![SJF Gantt Chart]({outdir_path.name}/SJF_no_transient_gantt.png)",
+        "",
+        "**Figure 3.** SRTF - With Transient",
+        f"![SRTF Gantt Chart]({outdir_path.name}/SRTF_with_transient_gantt.png)",
+        "",
+        "**Figure 4.** Round Robin - With Transient",
+        f"![RR Gantt Chart]({outdir_path.name}/RR_with_transient_gantt.png)",
+        "",
+        "These charts show process execution order over time. The transient process PX appears at t=10; preemptive policies (SRTF, RR) adapt immediately, while non-preemptive methods defer the emergency task until the current job completes.",
+    ]
+    lines += [""] + visuals_lines
 
     word_count = len(" ".join(filter(None, (line.strip() for line in lines))).split())
     if word_count < 700:

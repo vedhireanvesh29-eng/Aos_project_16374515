@@ -1,3 +1,44 @@
-﻿__pycache__/
-*.pyc
+﻿# Python bytecode / cache
+__pycache__/
+*.py[cod]
+*.class
+*.pyo
+
+# Virtual environments
+env/
+venv/
+.venv/
+.python-version
+
+# Build / distribution artifacts
+build/
+dist/
+*.egg-info/
+
+# IDE settings
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Test & coverage outputs
+.coverage
+htmlcov/
+.cache/
+.pytest_cache/
+
+# Logs
+*.log
+
+# Project-generated outputs
 FS25_Output_16374515/
+out_fs25/
+*.csv
+*.json
+*.png
+
+# System files
+.DS_Store
+Thumbs.db
